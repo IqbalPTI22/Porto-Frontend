@@ -1,4 +1,3 @@
-
 # Porto Frontend
 
 <p align="center">
@@ -52,6 +51,7 @@ cp .env.example .env
 ```
 
 **.env**
+
 ```env
 VITE_API_BASE_URL=http://localhost:3000
 ```
@@ -95,12 +95,12 @@ The frontend expects the following endpoints from your backend:
 
 ## 🏗️ Scripts
 
-| Command         | Description                  |
-|-----------------|-----------------------------|
-| `npm run dev`   | Start development server     |
-| `npm run build` | Build for production         |
-| `npm run preview` | Preview production build   |
-| `npm run lint`  | Run ESLint                  |
+| Command           | Description              |
+| ----------------- | ------------------------ |
+| `npm run dev`     | Start development server |
+| `npm run build`   | Build for production     |
+| `npm run preview` | Preview production build |
+| `npm run lint`    | Run ESLint               |
 
 ---
 
