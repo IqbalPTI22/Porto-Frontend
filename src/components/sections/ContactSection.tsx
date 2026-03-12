@@ -25,7 +25,7 @@ const ContactSection = ({ profile }: ContactSectionProps) => {
           <SectionTitle
             eyebrow="Contact"
             title="Let's Build Something"
-            description="Reach out through email or connect on social platforms."
+            description="Reach out directly via email or find me at the location below."
           />
 
           <a
@@ -35,32 +35,11 @@ const ContactSection = ({ profile }: ContactSectionProps) => {
             ✉ {profile.email}
           </a>
 
-          <div className="mt-5 flex flex-wrap gap-2">
-            {profile.socialLinks.length > 0 ? (
-              profile.socialLinks.map((socialLink, i) => (
-                <a
-                  key={socialLink.platform}
-                  href={socialLink.url}
-                  target="_blank"
-                  rel="noreferrer"
-                  className={`sticker ${
-                    [
-                      "border-amber-500/25 bg-amber-500/10 text-amber-300",
-                      "border-orange-500/25 bg-orange-500/10 text-orange-300",
-                      "border-yellow-600/25 bg-yellow-600/10 text-yellow-300",
-                      "border-amber-400/25 bg-amber-400/10 text-amber-200",
-                    ][i % 4]
-                  }`}
-                >
-                  {socialLink.platform}
-                </a>
-              ))
-            ) : (
-              <p className="text-xs text-amber-300/50">
-                Social links belum tersedia dari API.
-              </p>
-            )}
-          </div>
+          {profile.location ? (
+            <p className="mt-4 text-sm text-amber-300/65">
+              📍 {profile.location}
+            </p>
+          ) : null}
         </div>
       </Container>
     </section>

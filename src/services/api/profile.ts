@@ -3,13 +3,18 @@ import { requestJson } from "./client";
 
 interface RawProfile {
   id?: number;
-  name?: string;
   fullName?: string;
-  tagline?: string;
   headline?: string;
+  location?: string;
   avatarUrl?: string | null;
   bio?: string;
   email?: string;
+  createdAt?: string;
+  updatedAt?: string;
+
+  // Backward compatibility with older payloads.
+  name?: string;
+  tagline?: string;
   socialLinks?: Array<{ platform?: string; url?: string }>;
   githubUrl?: string;
   linkedinUrl?: string;
@@ -43,20 +48,24 @@ const normalizeProfile = (payload: unknown): Profile => {
   const source = Array.isArray(payload) ? payload[0] : payload;
   const raw = (source ?? {}) as RawProfile;
 
-  const name = raw.name ?? raw.fullName;
-  const tagline = raw.tagline ?? raw.headline;
+  const fullName = raw.fullName ?? raw.name;
+  const headline = raw.headline ?? raw.tagline;
+  const location = raw.location ?? "";
 
-  if (!name || !tagline || !raw.bio || !raw.email) {
+  if (!fullName || !headline || !raw.bio || !raw.email) {
     throw new Error("Profile payload is incomplete");
   }
 
   return {
     id: raw.id ?? 0,
-    name,
-    tagline,
+    fullName,
+    headline,
+    location,
     avatarUrl: raw.avatarUrl,
     bio: raw.bio,
     email: raw.email,
+    createdAt: raw.createdAt ?? new Date(0).toISOString(),
+    updatedAt: raw.updatedAt ?? new Date(0).toISOString(),
     socialLinks: pickSocialLinks(raw),
   };
 };

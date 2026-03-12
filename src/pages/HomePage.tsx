@@ -10,6 +10,7 @@ import { StatusMessage } from "../components/ui/StatusMessage";
 import { useProfile } from "../hooks/useProfile";
 import { useProjects } from "../hooks/useProjects";
 import { useSkills } from "../hooks/useSkills";
+import { useActivityUpdates } from "../hooks/useActivityUpdates";
 
 const HeroSection = lazy(() => import("../components/sections/HeroSection"));
 const AboutSection = lazy(() => import("../components/sections/AboutSection"));
@@ -18,6 +19,9 @@ const SkillsSection = lazy(
 );
 const ProjectsSection = lazy(
   () => import("../components/sections/ProjectsSection"),
+);
+const ActivityUpdatesSection = lazy(
+  () => import("../components/sections/ActivityUpdatesSection"),
 );
 const ContactSection = lazy(
   () => import("../components/sections/ContactSection"),
@@ -44,6 +48,13 @@ const HomePage = () => {
     errorMessage: skillsError,
     refetch: refetchSkills,
   } = useSkills();
+
+  const {
+    data: activityUpdates,
+    isLoading: isActivityUpdatesLoading,
+    errorMessage: activityUpdatesError,
+    refetch: refetchActivityUpdates,
+  } = useActivityUpdates();
 
   return (
     <main>
@@ -120,6 +131,27 @@ const HomePage = () => {
         ) : null}
         {!isProjectsLoading && !projectsError && projects ? (
           <ProjectsSection projects={projects} />
+        ) : null}
+      </Suspense>
+
+      <Suspense fallback={<ProjectsSkeleton />}>
+        {isActivityUpdatesLoading ? <ProjectsSkeleton /> : null}
+        {!isActivityUpdatesLoading && activityUpdatesError ? (
+          <section className="py-14 md:py-16">
+            <Container>
+              <StatusMessage
+                title="Unable to load activity updates"
+                message={activityUpdatesError}
+                actionLabel="Retry"
+                onAction={refetchActivityUpdates}
+              />
+            </Container>
+          </section>
+        ) : null}
+        {!isActivityUpdatesLoading &&
+        !activityUpdatesError &&
+        activityUpdates ? (
+          <ActivityUpdatesSection updates={activityUpdates} />
         ) : null}
       </Suspense>
 

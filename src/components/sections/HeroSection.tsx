@@ -54,10 +54,10 @@ const HeroSection = ({ profile }: HeroSectionProps) => {
               Portfolio
             </span>
             <h1 className="text-5xl font-bold leading-[0.92] text-amber-100 drop-shadow-[0_2px_16px_rgba(255,184,54,0.3)] sm:text-6xl md:text-7xl">
-              {profile.name}
+              {profile.fullName}
             </h1>
             <p className="mt-3 max-w-xl text-base font-medium text-amber-200/60 md:text-lg">
-              {profile.tagline}
+              {profile.headline}
             </p>
             {/* decorative persona chat bubble */}
             <div className="anime-wiggle mt-4 inline-block rounded-2xl rounded-bl-sm border border-amber-500/25 bg-amber-900/30 px-4 py-2 text-xs font-bold text-amber-300 shadow-sm backdrop-blur-sm">
@@ -77,7 +77,7 @@ const HeroSection = ({ profile }: HeroSectionProps) => {
               <SafeImage
                 src={profile.avatarUrl}
                 fallbackSrc={avatarPlaceholder}
-                alt={profile.name}
+                alt={profile.fullName}
                 className="h-48 w-48 rounded-full border-[3px] border-amber-900/60 object-cover shadow-lg sm:h-60 sm:w-60"
                 loading="eager"
               />

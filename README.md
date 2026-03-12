@@ -86,10 +86,19 @@ src/
 
 The frontend expects the following endpoints from your backend:
 
-- `GET /profile` — Returns profile data
-- `GET /skills` — Returns skills array
+- `GET /profile` — Returns singleton profile object
+- `PUT /profile` — Updates profile data (admin + auth on backend)
+- `GET /skills` — Returns all skills
+- `GET /skills/:id` — Returns a skill by id
 - `GET /projects` — Returns all projects
-- `GET /projects/:id` — Returns a single project by ID
+- `GET /projects/:id` — Returns a project by id
+- `GET /activity-updates` — Returns all activity updates
+- `GET /activity-updates/:id` — Returns activity update by id
+
+Notes:
+
+- All GET endpoints are public.
+- Dashboard wizard mode is no longer used; homepage content is fully API-driven.
 
 ---
 
@@ -133,30 +142,3 @@ Crafted with passion by [IqbalPTI22](https://github.com/IqbalPTI22)
 ---
 
 <p align="center"><i>Elevate your portfolio. Impress with elegance. Ship with confidence.</i></p>
-- `GET /projects`
-- `GET /projects/:id`
-
-## Struktur Folder
-
-```text
-src
-├ components
-│  ├ ui
-│  └ sections
-├ hooks
-├ pages
-├ services
-│  └ api
-├ types
-├ utils
-└ App.tsx
-```
-
-## Fitur Implementasi
-
-- Hero, About, Skills, Projects, Contact sections
-- Responsive design (desktop + mobile)
-- Project card grid dengan hover animation
-- Lazy loading untuk images (`loading="lazy"`)
-- Lazy loading section besar (`React.lazy` + `Suspense`)
-- Loading state + error fallback UI untuk setiap request API

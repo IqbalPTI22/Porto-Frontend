@@ -5,12 +5,15 @@ export interface SocialLink {
 
 export interface Profile {
   id: number;
-  name: string;
-  tagline: string;
+  fullName: string;
+  headline: string;
+  location: string;
   avatarUrl?: string | null;
   bio: string;
   email: string;
-  socialLinks: SocialLink[];
+  createdAt: string;
+  updatedAt: string;
+  socialLinks?: SocialLink[];
 }
 
 export interface Skill {
@@ -26,4 +29,16 @@ export interface Project {
   imageUrl?: string | null;
   githubUrl?: string | null;
   demoUrl?: string | null;
+}
+
+export interface ActivityUpdate {
+  id: number;
+  mediaType: "image" | "video";
+  mediaUrl: string;
+  title: string;
+  caption: string;
+  activityTime: string;
+  uploadedBy: string;
+  createdAt: string;
+  updatedAt: string;
 }
